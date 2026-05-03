@@ -1,6 +1,9 @@
-﻿namespace Inventory.Interface
+﻿using Inventory.Model;
+
+namespace Inventory.Interface
 {
-    public class ICustomerService
+    public interface ICustomerService
     {
+        Task<IEnumerable<Customer>> GetAll();
     }
 }
