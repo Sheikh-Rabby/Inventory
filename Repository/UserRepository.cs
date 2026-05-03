@@ -23,7 +23,7 @@ namespace Inventory.Repository
             return await _context.Users.FirstOrDefaultAsync(u => u.email == email);
         }
 
-        public async Task<User> userLogin(LoginDto login)
+        public async Task<User?> userLogin(LoginDto login)
         {
            return await _context.Users.FirstOrDefaultAsync(e => e.email == login.email && e.password==login.password);
         }
