@@ -1,6 +1,5 @@
 ﻿using Inventory.Model;
 using Microsoft.EntityFrameworkCore;
-using static Inventory.Model.Category;
 
 namespace Inventory.Data
 {

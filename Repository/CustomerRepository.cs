@@ -7,15 +7,15 @@ namespace Inventory.Repository
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private readonly AppDbContext _dbContext;
-        public CustomerRepository(AppDbContext dbContext)
+        private readonly AppDbContext _context;
+        public CustomerRepository(AppDbContext context)
         {
-            dbContext = _dbContext;
+            _context = context;
         }
 
         public async Task<IEnumerable<Customer>> GetAll()
         {
-           return await _dbContext.Customers.ToListAsync();
+           return await _context.Customers.ToListAsync();
         }
     }
 }
