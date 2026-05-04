@@ -1,4 +1,5 @@
-﻿using Inventory.Interface;
+﻿using Inventory.DTO;
+using Inventory.Interface;
 using Inventory.Model;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -20,7 +21,19 @@ namespace Inventory.Services
                 return Enumerable.Empty<Customer>();
             return customer;
         }
+        public async Task AddCustomer(CustomerDto dto)
+        {
+            var customer = new Customer
+            {
+                customerName = dto.customerName
+            };
 
-        
+
+            await _customerRepository.AddCustomer(customer);
+          
+        }
+
+
+
     }
 }

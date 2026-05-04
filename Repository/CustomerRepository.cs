@@ -1,4 +1,5 @@
 ﻿using Inventory.Data;
+using Inventory.DTO;
 using Inventory.Interface;
 using Inventory.Model;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,11 @@ namespace Inventory.Repository
         public async Task<IEnumerable<Customer>> GetAll()
         {
            return await _context.Customers.ToListAsync();
+        }
+        public async Task AddCustomer(Customer customer)
+        {
+            await _context.Customers.AddAsync(customer);
+            await _context.SaveChangesAsync();
         }
     }
 }

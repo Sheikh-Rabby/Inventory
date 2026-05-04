@@ -1,4 +1,6 @@
-﻿using Inventory.Interface;
+﻿using Inventory.DTO;
+using Inventory.Interface;
+using Inventory.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.Controllers
@@ -24,6 +26,16 @@ namespace Inventory.Controllers
             }
            return Ok(result);
             
+        }
+        [HttpPost("addcustomer")]
+        public async Task<IActionResult> AddCustomer([FromBody] CustomerDto customer)
+        {
+            if (string.IsNullOrWhiteSpace(customer.customerName)) 
+            {
+                return BadRequest("CustomerName Null or Blank");
+            }    
+            await _customerservice.AddCustomer(customer);
+            return Ok(new {message="Customer Added!"});
         }
     }
 }
