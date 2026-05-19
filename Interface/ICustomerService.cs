@@ -5,7 +5,7 @@ namespace Inventory.Interface
 {
     public interface ICustomerService
     {
-        Task<IEnumerable<Customer>> GetAll();
-        Task AddCustomer(CustomerDto customer);
+        Task<IEnumerable<Customer>> GetAllAsync();
+        Task AddAsync(CustomerDto customer);
     }
 }

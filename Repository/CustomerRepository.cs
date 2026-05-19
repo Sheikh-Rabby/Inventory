@@ -2,26 +2,19 @@
 using Inventory.DTO;
 using Inventory.Interface;
 using Inventory.Model;
+using Inventory.Repository.BaseRepository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Repository
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : BaseRepository<Customer>
     {
-        private readonly AppDbContext _context;
-        public CustomerRepository(AppDbContext context)
+        
+        public CustomerRepository(AppDbContext context):base(context)
         {
-            _context = context;
+            
         }
 
-        public async Task<IEnumerable<Customer>> GetAll()
-        {
-           return await _context.Customers.ToListAsync();
-        }
-        public async Task AddCustomer(Customer customer)
-        {
-            await _context.Customers.AddAsync(customer);
-            await _context.SaveChangesAsync();
-        }
+       
     }
 }

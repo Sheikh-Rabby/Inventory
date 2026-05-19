@@ -3,9 +3,8 @@ using Inventory.Model;
 
 namespace Inventory.Interface
 {
-    public interface ICustomerRepository
+    public interface ICustomerRepository:IBaseRepository<Customer>
     {
-        Task<IEnumerable<Customer>> GetAll();
-        Task AddCustomer(Customer customer);  
+        Task AddAsync(Customer customer);
     }
 }

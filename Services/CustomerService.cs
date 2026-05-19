@@ -5,23 +5,23 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Inventory.Services
 {
-    public class CustomerService:ICustomerService
+    public class CustomerService: ICustomerService
     {
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IBaseRepository<Customer> _customerRepository;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public CustomerService(IBaseRepository<Customer> customerRepository)
         {
             _customerRepository = customerRepository;
         }
 
-        public async Task<IEnumerable<Customer>> GetAll()
+        public async Task<IEnumerable<Customer>> GetAllAsync()
         {
-            var customer = await _customerRepository.GetAll();
+            var customer = await _customerRepository.GetAllAsync();
             if (customer == null)
                 return Enumerable.Empty<Customer>();
             return customer;
         }
-        public async Task AddCustomer(CustomerDto dto)
+        public async Task AddAsync(CustomerDto dto)
         {
             var customer = new Customer
             {
@@ -29,7 +29,7 @@ namespace Inventory.Services
             };
 
 
-            await _customerRepository.AddCustomer(customer);
+            await _customerRepository.AddAsync(customer);
           
         }
 

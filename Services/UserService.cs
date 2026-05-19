@@ -30,7 +30,7 @@ namespace Inventory.Services
                 phone = "01965236885"
             };
 
-            await _userRepository.AddUser(user);
+            await _userRepository.AddAsync(user);
            
             return new RegisterDto
             {
@@ -43,13 +43,18 @@ namespace Inventory.Services
 
         public async Task<User> Login(LoginDto login)
         {
-            
-            var result = await _userRepository.userLogin(login);
-            if(result == null)
+
+            var user = await _userRepository.GetUserByEmail(login.email);
+            if (user == null)
             {
                 throw new NotFoundException("User or email not Found");
             }
-            return result;
+
+            if(user.password != login.password)
+            {
+                throw new Exception("Invalid Password");
+            }
+            return user;
 
         }
     }

@@ -19,7 +19,7 @@ namespace Inventory.Controllers
         [HttpGet("GetALL")]
         public async Task <IActionResult> GetAll()
         {
-           var result = await _customerservice.GetAll();
+           var result = await _customerservice.GetAllAsync();
             if (!result.Any())
             {
                 return NotFound(new { message = "User Not Found" });
@@ -28,13 +28,13 @@ namespace Inventory.Controllers
             
         }
         [HttpPost("addcustomer")]
-        public async Task<IActionResult> AddCustomer([FromBody] CustomerDto customer)
+        public async Task<IActionResult> AddAsync([FromBody] CustomerDto customer)
         {
             if (string.IsNullOrWhiteSpace(customer.customerName)) 
             {
                 return BadRequest("CustomerName Null or Blank");
             }    
-            await _customerservice.AddCustomer(customer);
+            await _customerservice.AddAsync(customer);
             return Ok(new {message="Customer Added!"});
         }
     }
