@@ -1,5 +1,5 @@
 ﻿using Inventory.DTO;
-using Inventory.Interface;
+using Inventory.Interface.ServiceInterface;
 using Inventory.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +7,7 @@ namespace Inventory.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController :ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
 
@@ -23,7 +23,7 @@ namespace Inventory.Controllers
             {
             var result= await _userService.Register(dto);
            
-            return Ok(result);
+            return Created(string.Empty,result);
             }
             catch(ConflictException ex)
             {

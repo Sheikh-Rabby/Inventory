@@ -1,12 +1,14 @@
 ﻿using Inventory.DTO;
-using Inventory.Interface;
+using Inventory.Interface.ServiceInterface;
 using Inventory.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("api/[Controller]")]
+    [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerservice;
@@ -16,26 +18,22 @@ namespace Inventory.Controllers
         }
 
 
-        [HttpGet("GetALL")]
+        [HttpGet]
         public async Task <IActionResult> GetAll()
         {
            var result = await _customerservice.GetAllAsync();
-            if (!result.Any())
-            {
-                return NotFound(new { message = "User Not Found" });
-            }
            return Ok(result);
             
         }
-        [HttpPost("addcustomer")]
+        [HttpPost]
         public async Task<IActionResult> AddAsync([FromBody] CustomerDto customer)
         {
-            if (string.IsNullOrWhiteSpace(customer.customerName)) 
-            {
-                return BadRequest("CustomerName Null or Blank");
-            }    
+            if (string.IsNullOrWhiteSpace(customer.customerName))
+            
+            return BadRequest(new { message = "CustomerName Cannot be Null or Blank" });
+              
             await _customerservice.AddAsync(customer);
-            return Ok(new {message="Customer Added!"});
+            return Created( string.Empty, new {message="Customer Added!"});
         }
     }
 }

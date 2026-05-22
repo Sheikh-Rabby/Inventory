@@ -4,7 +4,5 @@
     {
         public int customerId { get; set; }
         public string customerName { get; set; }
-
-
     }
 }

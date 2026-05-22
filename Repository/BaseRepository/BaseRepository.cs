@@ -1,6 +1,8 @@
 ﻿using Inventory.Data;
 using Inventory.Interface;
+using Inventory.Interface.RepositoryInterface;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Inventory.Repository.BaseRepository
 {
@@ -42,7 +44,13 @@ namespace Inventory.Repository.BaseRepository
         {
             throw new NotImplementedException();
         }
-
+        public async Task<T?> GetByAsync (Expression <Func<T,bool>> condition )
+        {
+            return await _dbSet.FirstOrDefaultAsync(condition);
         
+        }
+
+
+
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Inventory.DTO;
 using Inventory.Interface;
+using Inventory.Interface.ServiceInterface;
 using Inventory.Model;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Inventory.Services
 {
-    public class CustomerService: ICustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly IBaseRepository<Customer> _customerRepository;
 
@@ -21,6 +21,7 @@ namespace Inventory.Services
                 return Enumerable.Empty<Customer>();
             return customer;
         }
+
         public async Task AddAsync(CustomerDto dto)
         {
             var customer = new Customer
@@ -28,12 +29,7 @@ namespace Inventory.Services
                 customerName = dto.customerName
             };
 
-
             await _customerRepository.AddAsync(customer);
-          
         }
-
-
-
     }
 }

@@ -8,5 +8,6 @@
         public string email { get; set; }
         public string? isActive { get; set; }
         public string phone { get; set; } = "01965236885";
+        public string role { get; set; } = "User";
     }
 }
